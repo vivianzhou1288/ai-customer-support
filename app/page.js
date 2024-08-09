@@ -21,6 +21,8 @@ import {
   GoogleAuthProvider,
 } from "firebase/auth";
 import { auth, firestore } from "../firebase.js";
+import ButtonAppBar from "./components/NavBar.js";
+import { UserAuth } from "./context/UserContext.js";
 
 const theme = createTheme({
   typography: {
@@ -36,46 +38,7 @@ export default function Home() {
     },
   ]);
   const [message, setMessage] = useState("");
-  const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(true);
-
-  const handleGoogleSignIn = async () => {
-    const provider = new GoogleAuthProvider();
-
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      console.log("User signed in: ", user);
-      // Handle user information, e.g., save to context or redirect
-    } catch (error) {
-      console.error("Error during sign in: ", error);
-    }
-  };
-
-  const googleLogin = () => {
-    setPersistence(auth, browserLocalPersistence)
-      .then(() => {
-        handleGoogleSignIn();
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  };
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-        console.log("User:", user);
-      } else {
-        setUser(null);
-        // setCheckingAuthState(false);
-      }
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
+  const { user } = UserAuth();
 
   const sendMessage = async () => {
     const userMessage = message.trim();
@@ -128,6 +91,7 @@ export default function Home() {
 
   return (
     <ThemeProvider theme={theme}>
+      <ButtonAppBar />
       <Box
         sx={{
           width: "100vw",
@@ -153,22 +117,22 @@ export default function Home() {
           <Typography
             variant="h3"
             align="center"
-            sx={{ color: "black", mb: 2 }}
+            sx={{ color: "black", mt: -3, mb: 2 }}
           >
             Welcome to Your Travel Assistant
           </Typography>
-          <Button onClick={googleLogin}>Sign In</Button>
+          {/* <Button onClick={googleLogin}>Sign In</Button> */}
         </Box>
         <Box
           sx={{
             width: { xs: "90%", sm: "80%", md: "500px" },
-            height: { xs: "60vh", sm: "70vh", md: "700px" },
+            height: { xs: "60vh", sm: "70vh", md: "550px" },
             border: "1px solid black",
             display: "flex",
             flexDirection: "column",
             // p: 2,
             overflowY: "auto",
-            mb: 2,
+            mb: 1,
           }}
         >
           <Stack direction={"column"} spacing={2} flexGrow={1}>
