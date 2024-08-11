@@ -35,7 +35,7 @@ export default function ChatBot({ conversation, onAddConversation }) {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      content: "Hi, I'm your travel assistant! How can I help you today?",
+      content: "Hi, I&apos;m your travel assistant! How can I help you today?",
     },
   ]);
   const [message, setMessage] = useState("");
@@ -62,7 +62,8 @@ export default function ChatBot({ conversation, onAddConversation }) {
         setMessages([
           {
             role: "assistant",
-            content: "Hi, I'm your travel assistant! How can I help you today?",
+            content:
+              "Hi, I&apos;m your travel assistant! How can I help you today?",
           },
         ]);
         setIsBookmarked(false);
@@ -306,7 +307,7 @@ export default function ChatBot({ conversation, onAddConversation }) {
                   ></Avatar>
                   <Box>
                     <Typography>TravelBot</Typography>
-                    <Typography>We\'re online</Typography>
+                    <Typography>We&apos;re online</Typography>
                   </Box>
                 </Box>
                 <Button>
