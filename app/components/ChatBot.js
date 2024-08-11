@@ -31,11 +31,11 @@ const theme = createTheme({
   },
 });
 
-export default function ChatBot({ conversation, onAddConversation }) {
+export default function ChatBot({ conversation }) {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      content: "Hi, I&apos;m your travel assistant! How can I help you today?",
+      content: "Hi, I&aposm your travel assistant! How can I help you today?",
     },
   ]);
   const [message, setMessage] = useState("");

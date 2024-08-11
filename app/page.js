@@ -163,25 +163,29 @@ export default function HomePage() {
         <CssBaseline />
         <AppBar position="fixed" open={open}>
           <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={() => {
-                handleDrawerOpen();
-                fetchConversations();
-              }}
-              edge="start"
-              sx={{ mr: 0, ...(open && { display: "none" }) }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <IconButton
-              color="inherit"
-              aria-label="start new conversation"
-              onClick={handleNewConversation}
-            >
-              <BorderColorIcon color="action" />
-            </IconButton>
+            {user ? (
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={() => {
+                  handleDrawerOpen();
+                  fetchConversations();
+                }}
+                edge="start"
+                sx={{ mr: 0, ...(open && { display: "none" }) }}
+              >
+                <MenuIcon />
+              </IconButton>
+            ) : null}
+            {user ? (
+              <IconButton
+                color="inherit"
+                aria-label="start new conversation"
+                onClick={handleNewConversation}
+              >
+                <BorderColorIcon color="action" />
+              </IconButton>
+            ) : null}
             <Typography
               variant="h6"
               noWrap
