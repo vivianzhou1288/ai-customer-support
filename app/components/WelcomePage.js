@@ -46,11 +46,13 @@ const WelcomePage = () => {
             Welcome to Your Travel Assistant.
           </Typography>
           <Typography sx={{ textAlign: "center", marginBottom: "20px" }}>
-            Having questions about your travel destinations. Ask our Travel
+            Have questions about your travel destinations. Ask our Travel
             Assistant Bot for help!
           </Typography>
           <Box sx={{ marginBottom: "20px" }}>
-            <Button onClick={googleLogin}>Login</Button>
+            <Button variant="contained" color="primary" onClick={googleLogin}>
+              Login with Google
+            </Button>
           </Box>
         </Box>
       </Container>
