@@ -36,7 +36,7 @@ export default function ChatBot({ conversation, onAddConversation }) {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      content: "Hi, I'm your travel assistant! How can I help you today?",
+      content: "Hi, I&apos;m your travel assistant! How can I help you today?",
     },
   ]);
   const [message, setMessage] = useState("");
