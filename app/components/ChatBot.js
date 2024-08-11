@@ -283,7 +283,14 @@ export default function ChatBot({ conversation }) {
           }}
         >
           <Stack direction={"column"} spacing={2} flexGrow={1}>
-            <Box bgcolor={"blue"}>
+            <Box
+              bgcolor={"blue"}
+              sx={{
+                position: "sticky",
+                top: 0,
+                zIndex: 1,
+              }}
+            >
               <Box
                 sx={{
                   display: "flex",
@@ -312,7 +319,9 @@ export default function ChatBot({ conversation }) {
                 </Box>
                 <Button>
                   <BookmarkIcon
-                    color={isBookmarked ? "warning" : "secondary"}
+                    sx={{
+                      color: isBookmarked ? "#FFAE42" : "white",
+                    }}
                     onClick={handleBookmarkToggle}
                   />
                 </Button>
@@ -343,7 +352,17 @@ export default function ChatBot({ conversation }) {
             ))}
             <div ref={messagesEndRef} />
           </Stack>
-          <Stack direction={"row"} spacing={2} padding={2}>
+          <Stack
+            direction={"row"}
+            spacing={2}
+            padding={2}
+            sx={{
+              position: "sticky",
+              bottom: 0,
+              zIndex: 1,
+              backgroundColor: "white",
+            }}
+          >
             <TextField
               label="Message"
               fullWidth
