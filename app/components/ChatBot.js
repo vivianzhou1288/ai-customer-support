@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Box,
   Stack,
@@ -12,7 +12,6 @@ import {
   Avatar,
 } from "@mui/material";
 import { kanit } from "../fonts.js";
-// import ButtonAppBar from "./components/NavBar.js";
 import { UserAuth } from "../context/UserContext.js";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { firestore } from "../../firebase.js";
@@ -36,13 +35,23 @@ export default function ChatBot({ conversation, onAddConversation }) {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      content: "Hi, I&apos;m your travel assistant! How can I help you today?",
+      content: "Hi, I'm your travel assistant! How can I help you today?",
     },
   ]);
   const [message, setMessage] = useState("");
   const [conversationId, setConversationId] = useState(null);
   const { user, loading } = UserAuth();
   const [isBookmarked, setIsBookmarked] = useState(false);
+
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   useEffect(() => {
     if (!loading && conversation) {
@@ -53,8 +62,7 @@ export default function ChatBot({ conversation, onAddConversation }) {
         setMessages([
           {
             role: "assistant",
-            content:
-              "Hi, I&apos;m your travel assistant! How can I help you today?",
+            content: "Hi, I'm your travel assistant! How can I help you today?",
           },
         ]);
         setIsBookmarked(false);
@@ -298,7 +306,7 @@ export default function ChatBot({ conversation, onAddConversation }) {
                   ></Avatar>
                   <Box>
                     <Typography>TravelBot</Typography>
-                    <Typography>We&apos;re online</Typography>
+                    <Typography>We\'re online</Typography>
                   </Box>
                 </Box>
                 <Button>
@@ -332,6 +340,7 @@ export default function ChatBot({ conversation, onAddConversation }) {
                 </Box>
               </Box>
             ))}
+            <div ref={messagesEndRef} />
           </Stack>
           <Stack direction={"row"} spacing={2} padding={2}>
             <TextField

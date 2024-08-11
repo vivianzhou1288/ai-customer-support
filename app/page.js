@@ -133,19 +133,6 @@ export default function HomePage() {
     ]);
   };
 
-  // const fetchConversations = async () => {
-  //   if (user) {
-  //     const userDocRef = doc(firestore, "users", user.uid);
-  //     const conversationsRef = collection(userDocRef, "conversations");
-  //     const querySnapshot = await getDocs(conversationsRef);
-  //     const convos = querySnapshot.docs.map((doc) => ({
-  //       id: doc.id,
-  //       ...doc.data(),
-  //     }));
-  //     setConversations(convos);
-  //   }
-  // };
-
   const fetchConversations = useCallback(async () => {
     if (user) {
       const userDocRef = doc(firestore, "users", user.uid);
@@ -286,7 +273,6 @@ export default function HomePage() {
           {user ? (
             <ChatBot
               conversation={selectedConversation} // Pass selected conversation to ChatBot
-              onAddConversation={handleAddConversation}
             />
           ) : (
             <WelcomePage />
