@@ -150,7 +150,7 @@ export default function HomePage() {
     if (!loading && user) {
       fetchConversations();
     }
-  }, [user]);
+  }, [loading, user, fetchConversations]);
 
   const handleConversationClick = (conversation) => {
     setSelectedConversation(conversation);

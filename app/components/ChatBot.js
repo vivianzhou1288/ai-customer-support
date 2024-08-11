@@ -72,7 +72,7 @@ export default function ChatBot({ conversation, onAddConversation }) {
     } else {
       setIsBookmarked(false);
     }
-  }, [conversation]);
+  }, [loading, conversation]);
 
   const saveConversationToFirebase = async (conversation, userId, name) => {
     try {
