@@ -130,7 +130,10 @@ export default function ChatBot({ conversation }) {
       setIsBookmarked(false);
     } else {
       // If the conversation is not bookmarked, save it
-      const name = messages[0]?.content || "New Conversation";
+      const name =
+        messages.length > 1 && messages[1].role === "user"
+          ? messages[1].content
+          : "New Conversation";
       const newConversationId = await saveConversationToFirebase(
         messages,
         user.uid,
