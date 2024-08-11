@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -133,7 +133,20 @@ export default function HomePage() {
     ]);
   };
 
-  const fetchConversations = async () => {
+  // const fetchConversations = async () => {
+  //   if (user) {
+  //     const userDocRef = doc(firestore, "users", user.uid);
+  //     const conversationsRef = collection(userDocRef, "conversations");
+  //     const querySnapshot = await getDocs(conversationsRef);
+  //     const convos = querySnapshot.docs.map((doc) => ({
+  //       id: doc.id,
+  //       ...doc.data(),
+  //     }));
+  //     setConversations(convos);
+  //   }
+  // };
+
+  const fetchConversations = useCallback(async () => {
     if (user) {
       const userDocRef = doc(firestore, "users", user.uid);
       const conversationsRef = collection(userDocRef, "conversations");
@@ -144,7 +157,7 @@ export default function HomePage() {
       }));
       setConversations(convos);
     }
-  };
+  }, [user]);
 
   useEffect(() => {
     if (!loading && user) {

@@ -44,16 +44,6 @@ export default function ChatBot({ conversation, onAddConversation }) {
   const { user, loading } = UserAuth();
   const [isBookmarked, setIsBookmarked] = useState(false);
 
-  // useEffect(() => {
-  //   if (!loading && conversation) {
-  //     setMessages(conversation.conversation || []);
-  //     setConversationId(conversation.id);
-  //     setIsBookmarked(true);
-  //   } else {
-  //     setIsBookmarked(false);
-  //   }
-  // }, [conversation]);
-
   useEffect(() => {
     if (!loading && conversation) {
       if (conversation.conversation.length > 0) {
@@ -63,7 +53,8 @@ export default function ChatBot({ conversation, onAddConversation }) {
         setMessages([
           {
             role: "assistant",
-            content: "Hi, I'm your travel assistant! How can I help you today?",
+            content:
+              "Hi, I&apos;m your travel assistant! How can I help you today?",
           },
         ]);
         setIsBookmarked(false);
