@@ -298,7 +298,7 @@ export default function ChatBot({ conversation, onAddConversation }) {
                   ></Avatar>
                   <Box>
                     <Typography>TravelBot</Typography>
-                    <Typography>We're online</Typography>
+                    <Typography>We&apos;re online</Typography>
                   </Box>
                 </Box>
                 <Button>
