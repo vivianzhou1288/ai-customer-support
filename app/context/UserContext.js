@@ -8,6 +8,7 @@ import {
   browserLocalPersistence,
 } from "firebase/auth";
 import { auth, firestore, googleAuthProvider } from "../../firebase.js";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const UserContext = createContext(null);
 
@@ -15,20 +16,43 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
 
-  const handleGoogleSignIn = async () => {
+  // const handleGoogleSignIn = async () => {
+  //   try {
+  //     const result = await signInWithPopup(auth, googleAuthProvider);
+  //     const user = result.user;
+  //     console.log("User signed in: ", user);
+  //   } catch (error) {
+  //     console.error("Error during sign in: ", error);
+  //   }
+  // };
+
+  const login = async () => {
     try {
       const result = await signInWithPopup(auth, googleAuthProvider);
+      console.log(result);
       const user = result.user;
-      console.log("User signed in: ", user);
+      if (user) {
+        const userDocRef = doc(firestore, "users", user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        if (!userDocSnap.exists()) {
+          await setDoc(userDocRef, {
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+          });
+        }
+      }
     } catch (error) {
-      console.error("Error during sign in: ", error);
+      console.log(error.message);
     }
   };
 
   const googleLogin = () => {
     setPersistence(auth, browserLocalPersistence)
       .then(() => {
-        handleGoogleSignIn();
+        // handleGoogleSignIn();
+        login();
       })
       .catch((error) => {
         console.log(error.message);
